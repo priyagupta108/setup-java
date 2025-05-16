@@ -26,6 +26,7 @@ export class JetBrainsDistribution extends JavaBase {
   ): Promise<JavaDownloadRelease> {
     const versionsRaw = await this.getAvailableVersions();
 
+    core.info(`Java versionsRaw ${JSON.stringify(versionsRaw)} ...`);
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
@@ -38,7 +39,7 @@ export class JetBrainsDistribution extends JavaBase {
     const satisfiedVersions = versions
       .filter(item => isVersionSatisfies(range, item.version))
       .sort((a, b) => {
-        return -semver.compare(a.version, b.version);
+        return -semver.compareBuild(a.version, b.version);
       });
 
     const resolvedFullVersion =
@@ -114,7 +115,7 @@ export class JetBrainsDistribution extends JavaBase {
       }
 
       const rawUrl = `https://api.github.com/repos/JetBrains/JetBrainsRuntime/releases?${requestArguments}`;
-
+      core.info(`Gathering available versions from '${rawUrl}'`);
       if (core.isDebug() && page_index === 1) {
         // url is identical except page_index so print it once for debug
         core.debug(`Gathering available versions from '${rawUrl}'`);
