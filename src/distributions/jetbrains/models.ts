@@ -10,4 +10,5 @@ export interface IJetBrainsVersion {
   semver: string;
   build: number;
   url: string;
+  prerelease: boolean;
 }

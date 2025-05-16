@@ -124,6 +124,7 @@ export class JetBrainsDistribution extends JavaBase {
       const paginationPage = (
         await this.http.getJson<IJetBrainsRawVersion[]>(rawUrl, requestHeaders)
       ).result;
+      core.info(`paginationPage '${paginationPage}'`);
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
@@ -146,6 +147,7 @@ export class JetBrainsDistribution extends JavaBase {
       // 11_0_11b1536.2
       // 11_0_11-b1522
       const tag = v.tag_name;
+      const prerelease = true;
 
       // Extract version string
       const vstring = tag
@@ -203,7 +205,8 @@ export class JetBrainsDistribution extends JavaBase {
         tag_name: tag,
         semver: semver.replace(/_/g, '.'),
         build: build,
-        url: url
+        url: url,
+        prerelease: prerelease
       } as IJetBrainsVersion;
 
       return {
