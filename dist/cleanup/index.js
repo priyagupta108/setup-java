@@ -93577,11 +93577,17 @@ function getDownloadArchiveExtension() {
 exports.getDownloadArchiveExtension = getDownloadArchiveExtension;
 function isVersionSatisfies(range, version) {
     var _a;
+    core.info(`semver.range: ${range}`);
+    core.info(`semver.range: ${JSON.stringify(range)} ...`);
+    core.info(`semver.version: ${version}`);
+    core.info(`semver.version: ${JSON.stringify(version)} ...`);
     if (semver.valid(range)) {
         // if full version with build digit is provided as a range (such as '1.2.3+4')
         // we should check for exact equal via compareBuild
         // since semver.satisfies doesn't handle 4th digit
         const semRange = semver.parse(range);
+        core.info(`semver.semRange: ${semRange}`);
+        core.info(`semver.semRange: ${JSON.stringify(semRange)} ...`);
         if (semRange && ((_a = semRange.build) === null || _a === void 0 ? void 0 : _a.length) > 0) {
             return semver.compareBuild(range, version) === 0;
         }
