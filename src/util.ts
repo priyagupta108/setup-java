@@ -64,6 +64,9 @@ export function isVersionSatisfies(range: string, version: string): boolean {
       return semver.compareBuild(range, version) === 0;
     }
   }
+  const result = semver.satisfies(version, range);
+  core.info(`semver.satisfies result: ${result}`);
+  core.info(`semver.satisfies result: ${JSON.stringify(result)} ...`);
 
   return semver.satisfies(version, range);
 }

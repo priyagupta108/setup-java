@@ -54,8 +54,11 @@ export class JetBrainsDistribution extends JavaBase {
         `Could not find satisfied version for SemVer '${range}'. ${availableOptionsMessage}`
       );
     }
+    core.info(`Java versions ${JSON.stringify(versions)} ...`);
+    core.info(
+      `Java satisfiedVersions ${JSON.stringify(satisfiedVersions)} ...`
+    );
 
-    core.info(`Java satisfiedVersions ${satisfiedVersions} ...`);
     core.info(`Java resolvedFullVersion ${resolvedFullVersion} ...`);
     return resolvedFullVersion;
   }

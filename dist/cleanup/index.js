@@ -93586,6 +93586,9 @@ function isVersionSatisfies(range, version) {
             return semver.compareBuild(range, version) === 0;
         }
     }
+    const result = semver.satisfies(version, range);
+    core.info(`semver.satisfies result: ${result}`);
+    core.info(`semver.satisfies result: ${JSON.stringify(result)} ...`);
     return semver.satisfies(version, range);
 }
 exports.isVersionSatisfies = isVersionSatisfies;
