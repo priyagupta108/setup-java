@@ -38,7 +38,7 @@ export class JetBrainsDistribution extends JavaBase {
     const satisfiedVersions = versions
       .filter(item => isVersionSatisfies(range, item.version))
       .sort((a, b) => {
-        return -semver.compareBuild(a.version, b.version);
+        return -semver.compare(a.version, b.version);
       });
 
     const resolvedFullVersion =
