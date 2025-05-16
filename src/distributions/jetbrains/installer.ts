@@ -59,7 +59,9 @@ export class JetBrainsDistribution extends JavaBase {
       `Java satisfiedVersions ${JSON.stringify(satisfiedVersions)} ...`
     );
 
-    core.info(`Java resolvedFullVersion ${resolvedFullVersion} ...`);
+    core.info(
+      `Java resolvedFullVersion ${JSON.stringify(resolvedFullVersion)} ...`
+    );
     return resolvedFullVersion;
   }
 
