@@ -138,7 +138,7 @@ export class JetBrainsDistribution extends JavaBase {
     // Add versions not available from the API but are downloadable
     const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
     rawVersions.push(...hidden.map(tag => ({tag_name: tag, name: tag})));
-    core.info(`rawVersions rawVersions ${JSON.stringify(rawVersions)}`);
+    
     const versions0 = rawVersions.map(async v => {
       // Release tags look like one of these:
       // jbr-release-21.0.3b465.3
