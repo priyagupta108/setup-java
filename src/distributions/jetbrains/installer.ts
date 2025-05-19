@@ -160,11 +160,13 @@ export class JetBrainsDistribution extends JavaBase {
       const vsplit = vstring.split('b');
       let semver = vsplit[0];
       const build = +vsplit[1];
-
+      core.debug(`vsplit '${vsplit}'`);
+      core.debug(`vsplit '${vsplit}'`);
+      core.debug(`vsplit '${vsplit}'`);
       // Normalize semver
       if (!semver.includes('.') && !semver.includes('_'))
         semver = `${semver}.0.0`;
-
+      core.debug(`vsplit 2 '${vsplit}'`);
       // Construct URL
       let type: string;
       switch (this.packageType ?? '') {
