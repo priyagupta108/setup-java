@@ -138,7 +138,7 @@ export class JetBrainsDistribution extends JavaBase {
     // Add versions not available from the API but are downloadable
     const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
     rawVersions.push(...hidden.map(tag => ({tag_name: tag, name: tag})));
-    
+
     const versions0 = rawVersions.map(async v => {
       // Release tags look like one of these:
       // jbr-release-21.0.3b465.3
@@ -168,7 +168,6 @@ export class JetBrainsDistribution extends JavaBase {
         semver = `${semver}.0.0`;
       core.info(`semver 2 '${semver}'`);
 
-      
       // Construct URL
       let type: string;
       switch (this.packageType ?? '') {
@@ -224,6 +223,9 @@ export class JetBrainsDistribution extends JavaBase {
       res.filter(item => item.include).map(item => item.item)
     );
 
+    core.info(`Java versions versions${JSON.stringify(versions)} ...`);
+
+    core.info(`Java versions0 versions0${JSON.stringify(versions0)} ...`);
     if (core.isDebug()) {
       core.startGroup('Print information about available versions');
       console.timeEnd('Retrieving available versions for JBR took'); // eslint-disable-line no-console
