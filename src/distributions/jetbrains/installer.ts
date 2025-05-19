@@ -124,7 +124,7 @@ export class JetBrainsDistribution extends JavaBase {
       const paginationPage = (
         await this.http.getJson<IJetBrainsRawVersion[]>(rawUrl, requestHeaders)
       ).result;
-      core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
+      // core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
 
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
