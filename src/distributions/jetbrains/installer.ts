@@ -138,7 +138,7 @@ export class JetBrainsDistribution extends JavaBase {
     // Add versions not available from the API but are downloadable
     const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
     rawVersions.push(...hidden.map(tag => ({tag_name: tag, name: tag})));
-    core.debug(`rawVersions rawVersions '${rawVersions}'`);
+    core.info(`rawVersions rawVersions '${rawVersions}'`);
     const versions0 = rawVersions.map(async v => {
       // Release tags look like one of these:
       // jbr-release-21.0.3b465.3
@@ -160,13 +160,13 @@ export class JetBrainsDistribution extends JavaBase {
       const vsplit = vstring.split('b');
       let semver = vsplit[0];
       const build = +vsplit[1];
-      core.debug(`vsplit '${vsplit}'`);
-      core.debug(`semver '${semver}'`);
-      core.debug(`build '${build}'`);
+      core.info(`vsplit '${vsplit}'`);
+      core.info(`semver '${semver}'`);
+      core.info(`build '${build}'`);
       // Normalize semver
       if (!semver.includes('.') && !semver.includes('_'))
         semver = `${semver}.0.0`;
-      core.debug(`semver 2 '${semver}'`);
+      core.info(`semver 2 '${semver}'`);
       // Construct URL
       let type: string;
       switch (this.packageType ?? '') {
