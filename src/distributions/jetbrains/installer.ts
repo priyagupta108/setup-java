@@ -130,14 +130,25 @@ export class JetBrainsDistribution extends JavaBase {
       const prereleasesF = (paginationPage ?? []).filter(
         r => r.prerelease === false
       );
+      const prereleasesF2 = (paginationPage ?? []).filter(r => !r.prerelease);
 
       // If you want to log them for debug:
       core.info(
         `Found prereleases true ${prereleasesT?.length} prerelease(s).`
       );
+      core.info(`Found prereleases true ${JSON.stringify(prereleasesT)} ...`);
 
       core.info(
         `Found prereleases false ${prereleasesF?.length} prerelease(s).`
+      );
+
+      core.info(
+        `Found prereleases false 2 ${prereleasesF2?.length} prerelease(s).`
+      );
+
+      core.info(`Found prereleases false ${JSON.stringify(prereleasesF)} ...`);
+      core.info(
+        `Found prereleases false 2 ${JSON.stringify(prereleasesF2)} ...`
       );
 
       // core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
