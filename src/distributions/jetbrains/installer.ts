@@ -124,6 +124,22 @@ export class JetBrainsDistribution extends JavaBase {
       const paginationPage = (
         await this.http.getJson<IJetBrainsRawVersion[]>(rawUrl, requestHeaders)
       ).result;
+
+      // Filter for prereleases
+      const prereleasesT = (paginationPage ?? []).filter(r => r.prerelease);
+      const prereleasesF = (paginationPage ?? []).filter(
+        r => r.prerelease === false
+      );
+
+      // If you want to log them for debug:
+      core.info(
+        `Found prereleases true ${prereleasesT?.length} prerelease(s).`
+      );
+
+      core.info(
+        `Found prereleases false ${prereleasesF?.length} prerelease(s).`
+      );
+
       // core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
 
       if (!paginationPage || paginationPage.length === 0) {
@@ -137,7 +153,9 @@ export class JetBrainsDistribution extends JavaBase {
 
     // Add versions not available from the API but are downloadable
     const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
-    rawVersions.push(...hidden.map(tag => ({tag_name: tag, name: tag})));
+    rawVersions.push(
+      ...hidden.map(tag => ({tag_name: tag, name: tag, prerelease: false}))
+    );
 
     const versions0 = rawVersions.map(async v => {
       // Release tags look like one of these:
