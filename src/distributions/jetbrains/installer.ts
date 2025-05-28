@@ -131,7 +131,8 @@ export class JetBrainsDistribution extends JavaBase {
         r => r.prerelease === false
       );
       const prereleasesF2 = (paginationPage ?? []).filter(r => !r.prerelease);
-
+      const formattedVersion = this.stable;
+      core.info(`formattedVersion ${formattedVersion} ...`);
       // If you want to log them for debug:
       core.info(
         `Found prereleases true ${prereleasesT?.length} prerelease(s).`
