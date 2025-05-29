@@ -26,6 +26,8 @@ export class JetBrainsDistribution extends JavaBase {
   ): Promise<JavaDownloadRelease> {
     const versionsRaw = await this.getAvailableVersions();
 
+    core.info(`Java versionsRaw ${JSON.stringify(versionsRaw)} ...`);
+
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
@@ -54,6 +56,15 @@ export class JetBrainsDistribution extends JavaBase {
         `Could not find satisfied version for SemVer '${range}'. ${availableOptionsMessage}`
       );
     }
+
+    core.info(`Java versions ${JSON.stringify(versions)} ...`);
+    core.info(
+      `Java satisfiedVersions ${JSON.stringify(satisfiedVersions)} ...`
+    );
+
+    core.info(
+      `Java resolvedFullVersion ${JSON.stringify(resolvedFullVersion)} ...`
+    );
 
     return resolvedFullVersion;
   }
@@ -113,21 +124,36 @@ export class JetBrainsDistribution extends JavaBase {
         core.debug(`Gathering available versions from '${rawUrl}'`);
       }
 
-      const paginationPage = (
+      const paginationPageResult = (
         await this.http.getJson<IJetBrainsRawVersion[]>(rawUrl, requestHeaders)
       ).result;
+
+      if (!paginationPageResult || paginationPageResult.length === 0) {
+        // break infinity loop because we have reached end of pagination
+        break;
+      }
+      let paginationPage: IJetBrainsRawVersion[] = [];
+
+      if (!this.stable) {
+        paginationPage = (paginationPage ?? []).filter(r => r.prerelease);
+      } else {
+        paginationPage = (paginationPage ?? []).filter(r => !r.prerelease);
+      }
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
       }
-
       rawVersions.push(...paginationPage);
       page_index++;
     }
 
     // Add versions not available from the API but are downloadable
     const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
-    rawVersions.push(...hidden.map(tag => ({tag_name: tag, name: tag})));
+    if (this.stable) {
+      rawVersions.push(
+        ...hidden.map(tag => ({tag_name: tag, name: tag, prerelease: false}))
+      );
+    }
 
     const versions0 = rawVersions.map(async v => {
       // Release tags look like one of these:
