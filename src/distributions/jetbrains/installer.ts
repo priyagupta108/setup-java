@@ -26,8 +26,6 @@ export class JetBrainsDistribution extends JavaBase {
   ): Promise<JavaDownloadRelease> {
     const versionsRaw = await this.getAvailableVersions();
 
-    core.info(`Java versionsRaw ${JSON.stringify(versionsRaw)} ...`);
-
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
@@ -132,28 +130,24 @@ export class JetBrainsDistribution extends JavaBase {
         // break infinity loop because we have reached end of pagination
         break;
       }
-      let paginationPage: IJetBrainsRawVersion[] = [];
-      core.info(`this.stable ${this.stable} ...`);
-      if (!this.stable) {
-        paginationPage = (paginationPageResult ?? []).filter(r => r.prerelease);
-      } else {
-        paginationPage = (paginationPageResult ?? []).filter(
-          r => !r.prerelease
-        );
-      }
 
-      core.info(` paginationPage ${JSON.stringify(paginationPage)} ...`);
+      const paginationPage: IJetBrainsRawVersion[] =
+        paginationPageResult.filter(version =>
+          this.stable ? !version.prerelease : version.prerelease
+        );
+
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
       }
+
       rawVersions.push(...paginationPage);
       page_index++;
     }
 
-    // Add versions not available from the API but are downloadable
-    const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
     if (this.stable) {
+      // Add versions not available from the API but are downloadable
+      const hidden = ['11_0_10b1145.115', '11_0_11b1341.60'];
       rawVersions.push(
         ...hidden.map(tag => ({tag_name: tag, name: tag, prerelease: false}))
       );
