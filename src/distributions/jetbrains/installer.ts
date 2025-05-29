@@ -133,12 +133,16 @@ export class JetBrainsDistribution extends JavaBase {
         break;
       }
       let paginationPage: IJetBrainsRawVersion[] = [];
-
+      core.info(`this.stable ${this.stable} ...`);
       if (!this.stable) {
-        paginationPage = (paginationPage ?? []).filter(r => r.prerelease);
+        paginationPage = (paginationPageResult ?? []).filter(r => r.prerelease);
       } else {
-        paginationPage = (paginationPage ?? []).filter(r => !r.prerelease);
+        paginationPage = (paginationPageResult ?? []).filter(
+          r => !r.prerelease
+        );
       }
+
+      core.info(` paginationPage ${JSON.stringify(paginationPage)} ...`);
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
