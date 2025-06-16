@@ -122,12 +122,27 @@ export class JetBrainsDistribution extends JavaBase {
         break;
       }
 
-      const paginationPage: IJetBrainsRawVersion[] =
-        paginationPageResult.filter(version =>
-          this.stable ? !version.prerelease : version.prerelease == true
-        );
+      // const paginationPage: IJetBrainsRawVersion[] =
+      //   paginationPageResult.filter(version =>
+      //     this.stable ? !version.prerelease : version.prerelease == true
+      //   );
 
-      core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
+      const paginationPage: IJetBrainsRawVersion[] =
+        paginationPageResult.filter(version => {
+          const include = this.stable
+            ? !version.prerelease
+            : version.prerelease;
+          if (!include) {
+            core.info(`Skipping version: ${JSON.stringify(version.tag_name)}`);
+          }
+          return include;
+        });
+
+      core.info(
+        `paginationPage ${JSON.stringify(
+          paginationPage.map(item => item?.tag_name)
+        )} ...`
+      );
       // if (!paginationPage || paginationPage.length === 0) {
       //   // break infinity loop because we have reached end of pagination
       //   break;
