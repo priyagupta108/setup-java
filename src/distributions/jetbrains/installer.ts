@@ -145,16 +145,27 @@ export class JetBrainsDistribution extends JavaBase {
       core.info(
         `paginationPage ${JSON.stringify(
           paginationPage.map(item => item?.tag_name)
-        )} ...`
+        )}`
       );
       // if (!paginationPage || paginationPage.length === 0) {
       //   // break infinity loop because we have reached end of pagination
       //   break;
       // }
 
+      core.info(
+        `rawVersions1 ${JSON.stringify(
+          rawVersions.map(item => item?.tag_name)
+        )} ...`
+      );
+
       rawVersions.push(...paginationPage);
       page_index++;
-      core.info(`rawVersions ${JSON.stringify(rawVersions)} ...`);
+    
+      core.info(
+        `rawVersions2 ${JSON.stringify(
+          rawVersions.map(item => item?.tag_name)
+        )} ...`
+      );
     }
 
     if (this.stable) {
