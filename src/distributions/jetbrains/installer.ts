@@ -133,7 +133,7 @@ export class JetBrainsDistribution extends JavaBase {
       //   break;
       // }
 
-      rawVersions.push(...paginationPage);
+      rawVersions.push(...paginationPageResult);
       page_index++;
       core.info(`rawVersions ${JSON.stringify(rawVersions)} ...`);
     }
