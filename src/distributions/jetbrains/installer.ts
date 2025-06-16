@@ -124,7 +124,7 @@ export class JetBrainsDistribution extends JavaBase {
 
       const paginationPage: IJetBrainsRawVersion[] =
         paginationPageResult.filter(version =>
-          this.stable ? version.prerelease == true : version.prerelease
+          this.stable ? !version.prerelease : version.prerelease == true
         );
 
       core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
