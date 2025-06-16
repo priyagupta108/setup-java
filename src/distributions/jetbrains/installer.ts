@@ -117,10 +117,6 @@ export class JetBrainsDistribution extends JavaBase {
         await this.http.getJson<IJetBrainsRawVersion[]>(rawUrl, requestHeaders)
       ).result;
 
-      core.info(
-        `paginationPageResult ${JSON.stringify(paginationPageResult)} ...`
-      );
-
       if (!paginationPageResult || paginationPageResult.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
@@ -139,6 +135,7 @@ export class JetBrainsDistribution extends JavaBase {
 
       rawVersions.push(...paginationPage);
       page_index++;
+      core.info(`rawVersions ${JSON.stringify(rawVersions)} ...`);
     }
 
     if (this.stable) {
