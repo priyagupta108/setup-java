@@ -133,7 +133,11 @@ export class JetBrainsDistribution extends JavaBase {
             ? !version.prerelease
             : version.prerelease;
           if (!include) {
-            core.info(`Skipping version: ${JSON.stringify(version.tag_name)}`);
+            core.info(
+              `Skipping version: ${JSON.stringify(
+                version.tag_name
+              )} ${JSON.stringify(version.prerelease)}`
+            );
           }
           return include;
         });
