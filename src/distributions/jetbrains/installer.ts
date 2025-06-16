@@ -132,7 +132,7 @@ export class JetBrainsDistribution extends JavaBase {
           const include = this.stable
             ? !version.prerelease
             : version.prerelease;
-          if (!include) {
+          if (include) {
             core.info(
               `Skipping version: ${JSON.stringify(
                 version.tag_name
