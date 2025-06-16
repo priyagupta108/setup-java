@@ -25,7 +25,6 @@ export class JetBrainsDistribution extends JavaBase {
     range: string
   ): Promise<JavaDownloadRelease> {
     const versionsRaw = await this.getAvailableVersions();
-    core.info(`versionsRaw ${JSON.stringify(versionsRaw)} ...`);
 
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
@@ -41,8 +40,6 @@ export class JetBrainsDistribution extends JavaBase {
       .sort((a, b) => {
         return -semver.compareBuild(a.version, b.version);
       });
-
-    core.info(`satisfiedVersions ${JSON.stringify(satisfiedVersions)} ...`);
 
     const resolvedFullVersion =
       satisfiedVersions.length > 0 ? satisfiedVersions[0] : null;
@@ -127,16 +124,18 @@ export class JetBrainsDistribution extends JavaBase {
 
       const paginationPage: IJetBrainsRawVersion[] =
         paginationPageResult.filter(version =>
-          this.stable ? !version.prerelease : version.prerelease
+          this.stable ? version.prerelease == true : version.prerelease
         );
 
+      core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
       if (!paginationPage || paginationPage.length === 0) {
         // break infinity loop because we have reached end of pagination
         break;
       }
 
-      rawVersions.push(...paginationPageResult);
+      rawVersions.push(...paginationPage);
       page_index++;
+      core.info(`rawVersions ${JSON.stringify(rawVersions)} ...`);
     }
 
     if (this.stable) {
