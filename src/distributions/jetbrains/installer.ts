@@ -128,10 +128,10 @@ export class JetBrainsDistribution extends JavaBase {
         );
 
       core.info(`paginationPage ${JSON.stringify(paginationPage)} ...`);
-      if (!paginationPage || paginationPage.length === 0) {
-        // break infinity loop because we have reached end of pagination
-        break;
-      }
+      // if (!paginationPage || paginationPage.length === 0) {
+      //   // break infinity loop because we have reached end of pagination
+      //   break;
+      // }
 
       rawVersions.push(...paginationPage);
       page_index++;
