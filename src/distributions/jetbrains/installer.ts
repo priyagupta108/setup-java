@@ -195,7 +195,7 @@ export class JetBrainsDistribution extends JavaBase {
 
       const vsplit = vstring.split('b');
       let semver = vsplit[0];
-      const build = +vsplit[1];
+      const build = vsplit[1];
 
       core.info(`vsplit ${JSON.stringify(vsplit)} ...`);
       core.info(`semver ${semver} ...`);
@@ -232,8 +232,7 @@ export class JetBrainsDistribution extends JavaBase {
       let include = false;
 
       const res = await this.http.head(url);
-      // core.info(`url ${url} ...`);
-      core.info(`res url ${JSON.stringify(res)} ...`);
+
       if (res.message.statusCode === HttpCodes.OK) {
         include = true;
       } else {
