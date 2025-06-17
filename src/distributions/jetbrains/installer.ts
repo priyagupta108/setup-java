@@ -29,20 +29,18 @@ export class JetBrainsDistribution extends JavaBase {
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
-      core.info(`versions ${JSON.stringify(versions)} ...`);
-
       return {
         version: formattedVersion,
         url: v.url
       } as JavaDownloadRelease;
     });
-
+    core.info(`versions ${JSON.stringify(versions)} ...`);
     const satisfiedVersions = versions
       .filter(item => isVersionSatisfies(range, item.version))
       .sort((a, b) => {
         return -semver.compareBuild(a.version, b.version);
       });
-
+    core.info(`satisfiedVersions ${JSON.stringify(satisfiedVersions)} ...`);
     const resolvedFullVersion =
       satisfiedVersions.length > 0 ? satisfiedVersions[0] : null;
     if (!resolvedFullVersion) {
