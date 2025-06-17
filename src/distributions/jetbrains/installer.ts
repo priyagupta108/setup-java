@@ -197,6 +197,10 @@ export class JetBrainsDistribution extends JavaBase {
       let semver = vsplit[0];
       const build = +vsplit[1];
 
+      core.info(`vsplit ${JSON.stringify(vsplit)} ...`);
+      core.info(`semver ${semver} ...`);
+      core.info(`build ${build} ...`);
+
       // Normalize semver
       if (!semver.includes('.') && !semver.includes('_'))
         semver = `${semver}.0.0`;
@@ -228,7 +232,7 @@ export class JetBrainsDistribution extends JavaBase {
       let include = false;
 
       const res = await this.http.head(url);
-      core.info(`url ${url} ...`);
+      // core.info(`url ${url} ...`);
       core.info(`res url ${JSON.stringify(res)} ...`);
       if (res.message.statusCode === HttpCodes.OK) {
         include = true;
