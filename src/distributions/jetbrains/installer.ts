@@ -29,6 +29,8 @@ export class JetBrainsDistribution extends JavaBase {
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
+      core.info(`versions ${JSON.stringify(versions)} ...`);
+
       return {
         version: formattedVersion,
         url: v.url
@@ -160,7 +162,7 @@ export class JetBrainsDistribution extends JavaBase {
 
       rawVersions.push(...paginationPage);
       page_index++;
-    
+
       core.info(
         `rawVersions2 ${JSON.stringify(
           rawVersions.map(item => item?.tag_name)
