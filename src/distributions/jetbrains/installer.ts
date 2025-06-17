@@ -228,6 +228,8 @@ export class JetBrainsDistribution extends JavaBase {
       let include = false;
 
       const res = await this.http.head(url);
+      core.info(`url ${url} ...`);
+      core.info(`res url ${JSON.stringify(res)} ...`);
       if (res.message.statusCode === HttpCodes.OK) {
         include = true;
       } else {
@@ -251,7 +253,11 @@ export class JetBrainsDistribution extends JavaBase {
       };
     });
 
-    core.info(`versions0 ${JSON.stringify(versions0)} ...`);
+    const versions1 = await Promise.all(versions0).then(res =>
+      res.filter(item => !item.include).map(item => item.item)
+    );
+
+    core.info(`versions111 ${JSON.stringify(versions1)} ...`);
 
     const versions = await Promise.all(versions0).then(res =>
       res.filter(item => item.include).map(item => item.item)
