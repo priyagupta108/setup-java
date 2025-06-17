@@ -25,7 +25,7 @@ export class JetBrainsDistribution extends JavaBase {
     range: string
   ): Promise<JavaDownloadRelease> {
     const versionsRaw = await this.getAvailableVersions();
-
+    core.info(`versionsRaw ${JSON.stringify(versionsRaw)} ...`);
     const versions = versionsRaw.map(v => {
       const formattedVersion = `${v.semver}+${v.build}`;
 
@@ -251,9 +251,13 @@ export class JetBrainsDistribution extends JavaBase {
       };
     });
 
+    core.info(`versions0 ${JSON.stringify(versions0)} ...`);
+
     const versions = await Promise.all(versions0).then(res =>
       res.filter(item => item.include).map(item => item.item)
     );
+
+    core.info(`versionsversions ${JSON.stringify(versions)} ...`);
 
     if (core.isDebug()) {
       core.startGroup('Print information about available versions');
