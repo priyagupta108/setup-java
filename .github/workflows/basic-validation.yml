@@ -3,7 +3,7 @@ name: Basic validation
 on:
   push:
     branches:
-      - main
+      - jbr-test
       - releases/*
     paths-ignore:
       - '**.md'
