@@ -9,6 +9,6 @@ export interface IJetBrainsRawVersion {
 export interface IJetBrainsVersion {
   tag_name: string;
   semver: string;
-  build: string;
+  build: number;
   url: string;
 }

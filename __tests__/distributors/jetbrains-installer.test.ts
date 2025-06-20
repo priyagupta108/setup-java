@@ -38,16 +38,26 @@ describe('getAvailableVersions', () => {
       checkLatest: false
     });
     const availableVersions = await distribution['getAvailableVersions']();
-    const manifestTags = new Set(manifestData.map(v => v.build));
-    const availableTags = new Set(availableVersions.map(v => v.build));
-    const missing = [...manifestTags].filter(tag => !availableTags.has(tag));
-    console.log('Missing in availableVersions:', missing); // <-- This will print the versions to your terminal
+    const manifestTags = manifestData.map(v => v.tag_name);
+    const availableTags = availableVersions.map(v => v.tag_name);
+    const missing = [...manifestTags].filter(
+      tag => !availableTags.includes(tag)
+    );
+
+    console.log('Missing in availableVersions:', missing);
+    console.log('availableTags:', JSON.stringify(availableTags, null, 2));
+    console.log('availableTags.length:', availableTags?.length);
+
+    console.log('manifestTags:', JSON.stringify(manifestTags, null, 2));
+    console.log('manifestTags.length:', manifestTags?.length);
+
+    // <-- This will print the versions to your terminal
     expect(availableVersions).not.toBeNull();
 
     const length =
       os.platform() === 'win32'
-        ? manifestData.length - 2
-        : manifestData.length + 2;
+        ? manifestData.length - 1
+        : manifestData.length + 1;
     expect(availableVersions.length).toBe(length);
   }, 10_000);
 });

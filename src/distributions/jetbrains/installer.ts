@@ -161,7 +161,7 @@ export class JetBrainsDistribution extends JavaBase {
 
       const vsplit = vstring.split('b');
       let semver = vsplit[0];
-      const build = vsplit[1];
+      const build = +vsplit[1];
 
       // Normalize semver
       if (!semver.includes('.') && !semver.includes('_'))

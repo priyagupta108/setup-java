@@ -464,8 +464,8 @@
   {
     "tag_name": "jbr17.0.3b469.30",
     "semver": "17.0.3",
-    "build": "469.3",
-    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b469.3.tar.gz"
+    "build": "469.30",
+    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b469.30.tar.gz"
   },
   {
     "tag_name": "jbr17.0.3b469.19",
@@ -506,8 +506,8 @@
   {
     "tag_name": "jbr17.0.3b423.10",
     "semver": "17.0.3",
-    "build": "423.1",
-    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b423.1.tar.gz"
+    "build": "423.10",
+    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b423.10.tar.gz"
   },
   {
     "tag_name": "jbr11_0_15b2043.56",
@@ -1190,8 +1190,8 @@
   {
     "tag_name": "jbr17.0.3b469.30",
     "semver": "17.0.3",
-    "build": "469.3",
-    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b469.3.tar.gz"
+    "build": "469.30",
+    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b469.30.tar.gz"
   },
   {
     "tag_name": "jbr17.0.3b469.19",
@@ -1232,8 +1232,8 @@
   {
     "tag_name": "jbr17.0.3b423.10",
     "semver": "17.0.3",
-    "build": "423.1",
-    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b423.1.tar.gz"
+    "build": "423.10",
+    "url": "https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.3-linux-x64-b423.10.tar.gz"
   },
   {
     "tag_name": "jbr11_0_15b2043.56",
