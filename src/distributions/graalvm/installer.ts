@@ -34,6 +34,10 @@ export class GraalVMDistribution extends JavaBase {
     core.info(
       `Downloading Java ${javaRelease.version} (${this.distribution}) from ${javaRelease.url} ...`
     );
+    core.info(
+      `MY_NAME'${process.env.MY_NAME}'`
+    );
+
     let javaArchivePath = await tc.downloadTool(javaRelease.url);
 
     core.info(`Extracting Java archive...`);
