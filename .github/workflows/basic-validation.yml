@@ -1,4 +1,5 @@
 name: Basic validation
+
 on:
   push:
     branches:
