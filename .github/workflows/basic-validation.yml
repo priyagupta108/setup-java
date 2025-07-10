@@ -3,14 +3,15 @@ name: Basic validation
 on:
   push:
     branches:
-      - main
+      - test-log
       - releases/*
     paths-ignore:
       - '**.md'
   pull_request:
     paths-ignore:
       - '**.md'
-
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   call-basic-validation:
     name: Basic validation
