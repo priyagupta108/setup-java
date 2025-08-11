@@ -3,7 +3,7 @@ name: Validate local file
 on:
   push:
     branches:
-      - test-windows-2025-runner
+      - main
       - releases/*
     paths-ignore:
       - '**.md'
