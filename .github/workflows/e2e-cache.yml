@@ -3,7 +3,7 @@ name: Validate cache
 on:
   push:
     branches:
-      - main
+      - test-windows-2025-runner
       - releases/*
     paths-ignore:
       - '**.md'
@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-latest]
+        os: [windows-2025]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-latest]
+        os: [windows-2025]
     needs: gradle-save
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-latest]
+        os: [windows-2025]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -93,7 +93,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-latest]
+        os: [windows-2025]
     needs: maven-save
     steps:
       - name: Checkout
@@ -121,7 +121,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-22.04]
+        os: [windows-2025]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -147,8 +147,8 @@ jobs:
             echo "::error::The ~/Library/Caches/Coursier directory does not exist unexpectedly"
             exit 1
           fi
-      - name: Check files to cache on windows-latest
-        if: matrix.os == 'windows-latest'
+      - name: Check files to cache on windows-2025
+        if: matrix.os == 'windows-2025'
         run: |
           if [ ! -d ~/AppData/Local/Coursier/Cache ]; then
             echo "::error::The ~/AppData/Local/Coursier/Cache directory does not exist unexpectedly"
@@ -170,7 +170,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, windows-latest, ubuntu-22.04]
+        os: [windows-2025]
     needs: sbt-save
     steps:
       - name: Checkout
@@ -192,7 +192,7 @@ jobs:
           fi
           ls ~/Library/Caches/Coursier
       - name: Confirm that ~/AppData/Local/Coursier/Cache directory has been made
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'windows-2025'
         run: |
           if [ ! -d ~/AppData/Local/Coursier/Cache ]; then
             echo "::error::The ~/AppData/Local/Coursier/Cache directory does not exist unexpectedly"
