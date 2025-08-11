@@ -3,7 +3,7 @@ name: Validate publishing functionality
 on:
   push:
     branches:
-      - main
+      - test-windows-2025-runner
       - releases/*
     paths-ignore:
       - '**.md'
