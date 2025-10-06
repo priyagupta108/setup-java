@@ -3,7 +3,7 @@ name: Basic validation
 on:
   push:
     branches:
-      - main
+      - test-rate-limit
       - releases/*
     paths-ignore:
       - '**.md'
