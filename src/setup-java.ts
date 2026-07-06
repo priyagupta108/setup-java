@@ -13,6 +13,7 @@ import * as path from 'path';
 import {fileURLToPath} from 'url';
 import {getJavaDistribution} from './distributions/distribution-factory.js';
 import {JavaInstallerOptions} from './distributions/base-models.js';
+import {configureMavenArgs} from './maven-args.js';
 
 async function run() {
   try {
@@ -93,6 +94,7 @@ async function run() {
     core.info(`##[add-matcher]${path.join(matchersPath, 'java.json')}`);
 
     await auth.configureAuthentication();
+    configureMavenArgs();
     if (cache && isCacheFeatureAvailable()) {
       await restore(cache, cacheDependencyPath);
     }

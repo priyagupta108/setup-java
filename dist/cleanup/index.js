@@ -95856,6 +95856,10 @@ const MVN_SETTINGS_FILE = 'settings.xml';
 const MVN_TOOLCHAINS_FILE = 'toolchains.xml';
 const INPUT_MVN_TOOLCHAIN_ID = 'mvn-toolchain-id';
 const INPUT_MVN_TOOLCHAIN_VENDOR = 'mvn-toolchain-vendor';
+const INPUT_SHOW_DOWNLOAD_PROGRESS = 'show-download-progress';
+const MAVEN_ARGS_ENV = 'MAVEN_ARGS';
+const MAVEN_NO_TRANSFER_PROGRESS_FLAG = '-ntp';
+const MAVEN_NO_TRANSFER_PROGRESS_LONG_FLAG = '--no-transfer-progress';
 const constants_DISTRIBUTIONS_ONLY_MAJOR_VERSION = (/* unused pure expression or super */ null && (['corretto']));
 
 ;// CONCATENATED MODULE: ./src/util.ts
