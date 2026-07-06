@@ -1,17 +1,18 @@
 import fs from 'fs';
 import * as core from '@actions/core';
-import * as auth from './auth';
+import * as auth from './auth.js';
 import {
   getBooleanInput,
   isCacheFeatureAvailable,
   getVersionFromFileContent
-} from './util';
-import * as toolchains from './toolchains';
-import * as constants from './constants';
-import {restore} from './cache';
+} from './util.js';
+import * as toolchains from './toolchains.js';
+import * as constants from './constants.js';
+import {restore} from './cache.js';
 import * as path from 'path';
-import {getJavaDistribution} from './distributions/distribution-factory';
-import {JavaInstallerOptions} from './distributions/base-models';
+import {fileURLToPath} from 'url';
+import {getJavaDistribution} from './distributions/distribution-factory.js';
+import {JavaInstallerOptions} from './distributions/base-models.js';
 
 async function run() {
   try {
@@ -83,7 +84,12 @@ async function run() {
       await installVersion(version, installerInputsOptions, index);
     }
     core.endGroup();
-    const matchersPath = path.join(__dirname, '..', '..', '.github');
+    const matchersPath = path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      '..',
+      '..',
+      '.github'
+    );
     core.info(`##[add-matcher]${path.join(matchersPath, 'java.json')}`);
 
     await auth.configureAuthentication();
