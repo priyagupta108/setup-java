@@ -70,11 +70,17 @@ describe('getAvailableVersions', () => {
 
   it('load available versions', async () => {
     spyHttpClient = jest.spyOn(HttpClient.prototype, 'getJson');
-    spyHttpClient.mockReturnValueOnce({
-      statusCode: 200,
-      headers: {},
-      result: manifestData as any
-    });
+    spyHttpClient
+      .mockReturnValueOnce({
+        statusCode: 200,
+        headers: {},
+        result: manifestData as any
+      })
+      .mockReturnValue({
+        statusCode: 200,
+        headers: {},
+        result: []
+      });
 
     const distribution = new JetBrainsDistribution({
       version: '17',
